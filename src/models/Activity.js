@@ -47,6 +47,10 @@ const Activity = sequelize.define('Activity', {
   estado: {
     type: DataTypes.ENUM('Programada', 'En Curso', 'Completada', 'Cancelada'),
     defaultValue: 'Programada'
+  },
+  notas: {
+    type: DataTypes.TEXT,
+    allowNull: true
   }
 }, {
   tableName: 'activities',

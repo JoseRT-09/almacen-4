@@ -31,6 +31,7 @@ export interface Activity {
     telefono?: string;
   };
   max_participantes?: number;
+  inscritos_count?: number;
   estado: ActivityStatus;
   notas?: string;
   created_at: Date | string;

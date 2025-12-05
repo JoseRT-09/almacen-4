@@ -69,7 +69,7 @@ exports.getAllComplaints = async (req, res) => {
     });
 
     res.json({
-      data: complaintsFormatted,
+      complaints: complaintsFormatted,
       total: count,
       pages: Math.ceil(count / limit),
       currentPage: parseInt(page)
@@ -113,7 +113,7 @@ exports.getComplaintById = async (req, res) => {
       complaintObj.usuario = { id: null, nombre: 'Anónimo', apellido: null, email: null, telefono: null };
     }
 
-    res.json(complaintObj);
+    res.json({ complaint: complaintObj });
   } catch (error) {
     console.error('Error al obtener queja:', error);
     res.status(500).json({ message: 'Error al obtener queja', error: error.message });

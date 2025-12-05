@@ -2,10 +2,10 @@ import { Residence } from './residence.model';
 import { User } from './user.model';
 
 export enum ReportType {
-  INCENDIO = 'Incendio',
-  ELECTRICO = 'Eléctrico',
-  AGUA = 'Agua',
-  ROBO = 'Robo',
+  MANTENIMIENTO = 'Mantenimiento',
+  LIMPIEZA = 'Limpieza',
+  SEGURIDAD = 'Seguridad',
+  INSTALACIONES = 'Instalaciones',
   OTRO = 'Otro'
 }
 
@@ -22,13 +22,15 @@ export interface Report {
   id: number;
   tipo: ReportType;
   residencia_id?: number;
-  reportado_por?: number;  // Es number según el backend
+  reportado_por_id?: number;  // ID del usuario que reportó
+  fecha_reporte?: Date | string;
   titulo: string;
   descripcion: string;
   prioridad: ReportPriority;
   estado: ReportStatus;
   asignado_a?: number;
   fecha_resolucion?: Date | string;
+  notas_adicionales?: string;
   created_at?: Date | string;
   updated_at?: Date | string;
   
