@@ -72,15 +72,30 @@ app.use((err, req, res, next) => {
 // Sincronizar base de datos y arrancar servidor
 const PORT = process.env.PORT || 3000;
 
-// ⚠️ IMPORTANTE: Usa { force: true } UNA SOLA VEZ para recrear las tablas y ENUMs
-// Luego cambia a { alter: true } o simplemente sync() para producción
-sequelize.sync({ force: true })
+// Modo de sincronización de base de datos
+// - { alter: true }: Actualiza las tablas sin borrar datos (recomendado)
+// - { force: true }: Recrea todas las tablas (BORRA TODOS LOS DATOS - solo para desarrollo)
+// - {}: Solo crea tablas si no existen (producción)
+const syncOptions = process.env.DB_FORCE_SYNC === 'true'
+  ? { force: true }
+  : process.env.DB_ALTER_SYNC === 'true'
+    ? { alter: true }
+    : {};
+
+sequelize.sync(syncOptions)
   .then(() => {
-    console.log('✅ Base de datos sincronizada (tablas recreadas)');
-    console.log('⚠️  IMPORTANTE: Cambia { force: true } a { alter: true } después de esta ejecución');
+    if (syncOptions.force) {
+      console.log('⚠️  Base de datos sincronizada - TABLAS RECREADAS (datos borrados)');
+    } else if (syncOptions.alter) {
+      console.log('✅ Base de datos sincronizada - Tablas actualizadas sin perder datos');
+    } else {
+      console.log('✅ Base de datos sincronizada - Tablas verificadas');
+    }
+
     app.listen(PORT, () => {
       console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
       console.log(`📝 Documentación de API disponible en http://localhost:${PORT}`);
+      console.log(`🌍 Modo: ${process.env.NODE_ENV || 'development'}`);
     });
   })
   .catch(err => {
