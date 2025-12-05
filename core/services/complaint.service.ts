@@ -21,7 +21,7 @@ export interface Complaint {
 }
 
 export interface ComplaintListResponse {
-  data: Complaint[];
+  complaints: Complaint[];
   total: number;
   pages: number;
   currentPage: number;
@@ -70,8 +70,8 @@ export class ComplaintService {
     return this.http.get<ComplaintListResponse>(this.apiUrl, { params });
   }
 
-  getComplaintById(id: number): Observable<Complaint> {
-    return this.http.get<Complaint>(`${this.apiUrl}/${id}`);
+  getComplaintById(id: number): Observable<{ complaint: Complaint }> {
+    return this.http.get<{ complaint: Complaint }>(`${this.apiUrl}/${id}`);
   }
 
   createComplaint(data: CreateComplaintData): Observable<{ message: string; complaint: Complaint }> {

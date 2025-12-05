@@ -84,7 +84,7 @@ export class ActivityCalendarComponent implements OnInit {
       fecha_fin: endOfMonth.toISOString()
     }).subscribe({
       next: (response) => {
-        this.activities = response.data;
+        this.activities = response.activities;
         this.generateCalendar();
         this.isLoading = false;
       },

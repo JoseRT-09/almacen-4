@@ -7,13 +7,14 @@ export interface Report {
   id: number;
   titulo: string;
   descripcion: string;
-  tipo: 'Incendio' | 'Eléctrico' | 'Agua' | 'Robo' | 'Otro';
+  tipo: 'Mantenimiento' | 'Limpieza' | 'Seguridad' | 'Instalaciones' | 'Otro';
   prioridad: 'Baja' | 'Media' | 'Alta' | 'Crítica';
   estado: 'Abierto' | 'En Progreso' | 'Resuelto' | 'Cerrado';
   reportado_por_id?: number;
   reportado_por?: number;
   asignado_a?: number;
   residencia_id?: number;
+  fecha_reporte?: string;
   fecha_resolucion?: string;
   notas_adicionales?: string;
   created_at?: string;
@@ -25,7 +26,7 @@ export interface Report {
 }
 
 export interface ReportListResponse {
-  data: Report[];
+  reports: Report[];
   total: number;
   pages: number;
   currentPage: number;
@@ -34,7 +35,7 @@ export interface ReportListResponse {
 export interface CreateReportData {
   titulo: string;
   descripcion: string;
-  tipo: 'Incendio' | 'Eléctrico' | 'Agua' | 'Robo' | 'Otro';
+  tipo: 'Mantenimiento' | 'Limpieza' | 'Seguridad' | 'Instalaciones' | 'Otro';
   prioridad?: 'Baja' | 'Media' | 'Alta' | 'Crítica';
   residencia_id?: number;
 }

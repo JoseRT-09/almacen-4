@@ -29,7 +29,7 @@ export interface Residence {
 }
 
 export interface ResidenceListResponse {
-  data: Residence[];
+  residences: Residence[];
   total: number;
   pages: number;
   currentPage: number;
@@ -80,8 +80,8 @@ export class ResidenceService {
     return this.http.get<ResidenceListResponse>(this.apiUrl, { params });
   }
 
-  getResidenceById(id: number): Observable<Residence> {
-    return this.http.get<Residence>(`${this.apiUrl}/${id}`);
+  getResidenceById(id: number): Observable<{ residence: Residence }> {
+    return this.http.get<{ residence: Residence }>(`${this.apiUrl}/${id}`);
   }
 
   createResidence(data: CreateResidenceData): Observable<{ message: string; residence: Residence }> {
@@ -107,8 +107,8 @@ export class ResidenceService {
     );
   }
 
-  getReassignmentHistory(residenceId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/${residenceId}/history`);
+  getReassignmentHistory(residenceId: number): Observable<{ history: any[] }> {
+    return this.http.get<{ history: any[] }>(`${this.apiUrl}/${residenceId}/history`);
   }
 
   deleteResidence(id: number): Observable<{ message: string }> {

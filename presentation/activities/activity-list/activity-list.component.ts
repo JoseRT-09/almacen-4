@@ -151,7 +151,7 @@ export class ActivityListComponent implements OnInit {
 
     this.activityService.getAllActivities(params).subscribe({
       next: (response) => {
-        this.activities = response.data || [];
+        this.activities = response.activities || [];
         this.dataSource.data = this.activities;
         this.totalActivities = response.total || this.activities.length;
         this.isLoading = false;

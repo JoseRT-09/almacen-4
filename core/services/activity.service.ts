@@ -22,7 +22,7 @@ export interface Activity {
 }
 
 export interface ActivityListResponse {
-  data: Activity[];
+  activities: Activity[];
   total: number;
   pages: number;
   currentPage: number;

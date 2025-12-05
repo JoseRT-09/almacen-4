@@ -155,7 +155,7 @@ export class ReportListComponent implements OnInit {
 
     this.reportService.getAllReports(params).subscribe({
       next: (response) => {
-        this.dataSource.data = response.data;
+        this.dataSource.data = response.reports;
         this.totalReports = response.total;
         this.isLoading = false;
       },

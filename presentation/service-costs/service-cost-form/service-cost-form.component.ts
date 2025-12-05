@@ -124,7 +124,7 @@ export class ServiceCostFormComponent implements OnInit {
   loadResidences(): void {
     this.getAllResidences.execute({ page: 1, limit: 1000 }).subscribe({
       next: (response) => {
-        this.residences = response.data;
+        this.residences = response.residences;
       },
       error: (error) => {
         console.error('Error loading residences:', error);

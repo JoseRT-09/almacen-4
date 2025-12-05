@@ -151,7 +151,7 @@ export class ComplaintListComponent implements OnInit {
 
     this.complaintService.getAllComplaints(params).subscribe({
       next: (response) => {
-        this.dataSource.data = response.data;
+        this.dataSource.data = response.complaints;
         this.totalComplaints = response.total;
         this.isLoading = false;
       },
